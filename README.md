@@ -102,6 +102,6 @@ Windows kind 클러스터(진짜 kubelet, 가짜 GPU)에서도 같은 결과가 
 | `gpuq` 제출/리포트 도구 + 단위 테스트 | ✅ 완료 |
 | S1~S4 실험 (KWOK 시뮬레이션, 실제 Kueue 컨트롤러) | ✅ VERIFIED |
 | kind 클러스터 + 가짜 GPU 등록, S1~S4 재현 (Windows) | ✅ VERIFIED ([결과](evidence/kind/RESULTS.md)) |
-| 실제 GPU time-slicing | ⬜ NOT VERIFIED |
+| 실제 GPU time-slicing (RTX 4060, k3s on WSL2) | ✅ VERIFIED ([결과](evidence/real-gpu/RESULTS.md)) |
 
 > 실제로 돌려서 확인한 항목만 완료로 바꿉니다.

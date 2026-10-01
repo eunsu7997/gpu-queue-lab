@@ -1,0 +1,1 @@
+{"job": "bench-n1-1-hm9ms", "steps": 3000, "train_s": 43.7, "steps_per_s": 68.6, "gpu": "NVIDIA GeForce RTX 4060", "max_mem_mb": 218, "start": 1790865021.62, "end": 1790865065.32}
