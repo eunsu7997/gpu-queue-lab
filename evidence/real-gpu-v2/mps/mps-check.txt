@@ -1,0 +1,15 @@
+## GPU device nodes inside the container (native Linux has /dev/nvidia0, /dev/nvidiactl; WSL2 has only /dev/dxg)
+crw-rw-rw- 1 root root 10, 258 Oct  1 14:18 dxg
+name, driver_version
+NVIDIA GeForce RTX 4060, 616.92
+## nvidia-cuda-mps-control from the Ubuntu driver package
+package: nvidia-compute-utils-610
+mps-control -d exit code: 33
+Cannot find MPS control daemon process
+control query exit code: 1
+## log dir
+total 8
+drwxr-xr-x 2 root root 4096 Oct  1 17:49 .
+drwxrwxrwt 1 root root 4096 Oct  1 17:49 ..
+## CUDA itself still works (plain time-sliced context)
+cuda ok NVIDIA GeForce RTX 4060 23854.423828125

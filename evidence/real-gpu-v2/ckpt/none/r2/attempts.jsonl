@@ -1,0 +1,16 @@
+{"event": "start", "job": "a-01", "size": "medium", "t": 1790874904.401, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-01", "size": "medium", "t": 1790875133.673, "attempt": 1, "step": 8000, "run_s": 229.27, "max_mem_mb": 130}
+{"event": "start", "job": "a-02", "size": "medium", "t": 1790874904.406, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "sigterm", "job": "a-02", "size": "medium", "t": 1790874992.994, "attempt": 1, "step": 2905, "saved_s": null, "run_s": 88.59}
+{"event": "start", "job": "a-02", "size": "medium", "t": 1790875126.263, "attempt": 2, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-02", "size": "medium", "t": 1790875253.042, "attempt": 2, "step": 8000, "run_s": 126.78, "max_mem_mb": 130}
+{"event": "start", "job": "a-03", "size": "medium", "t": 1790874904.649, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "sigterm", "job": "a-03", "size": "medium", "t": 1790874991.984, "attempt": 1, "step": 2835, "saved_s": null, "run_s": 87.33}
+{"event": "start", "job": "a-03", "size": "medium", "t": 1790875126.254, "attempt": 2, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-03", "size": "medium", "t": 1790875253.042, "attempt": 2, "step": 8000, "run_s": 126.79, "max_mem_mb": 130}
+{"event": "start", "job": "a-04", "size": "medium", "t": 1790874904.841, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-04", "size": "medium", "t": 1790875134.377, "attempt": 1, "step": 8000, "run_s": 229.53, "max_mem_mb": 130}
+{"event": "start", "job": "b-01", "size": "medium", "t": 1790874996.425, "attempt": 1, "resume_step": 0, "steps_total": 4000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "b-01", "size": "medium", "t": 1790875118.581, "attempt": 1, "step": 4000, "run_s": 122.15, "max_mem_mb": 130}
+{"event": "start", "job": "b-02", "size": "medium", "t": 1790874996.638, "attempt": 1, "resume_step": 0, "steps_total": 4000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "b-02", "size": "medium", "t": 1790875118.811, "attempt": 1, "step": 4000, "run_s": 122.17, "max_mem_mb": 130}

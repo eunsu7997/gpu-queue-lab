@@ -1,0 +1,1529 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:46Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "321cc186-d9f9-442c-90b9-60a74854ebe6"
+                },
+                "name": "job-a-01-large-d6c75",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-01-large",
+                        "uid": "321cc186-d9f9-442c-90b9-60a74854ebe6"
+                    }
+                ],
+                "resourceVersion": "4307",
+                "uid": "4aed4bad-6d0e-4509-b54b-aeb35ec0817d"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-01-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-01-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-01-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:49:46Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:49:46Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:35Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:35Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:46Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "5e5f90d5-ac50-4f37-9674-b3a8709bb1e8"
+                },
+                "name": "job-a-02-large-af08d",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-02-large",
+                        "uid": "5e5f90d5-ac50-4f37-9674-b3a8709bb1e8"
+                    }
+                ],
+                "resourceVersion": "4328",
+                "uid": "6dd9a87d-03ab-4d5c-b1a7-1fe6a714a628"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-02-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-02-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-02-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:49:46Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:49:46Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:36Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:36Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:46Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "c0b5541b-3f6f-4289-b102-8e01a80690fe"
+                },
+                "name": "job-a-03-large-a538d",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-03-large",
+                        "uid": "c0b5541b-3f6f-4289-b102-8e01a80690fe"
+                    }
+                ],
+                "resourceVersion": "4489",
+                "uid": "5f976867-57e5-4259-8d09-a3a4223812b3"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-03-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-03-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-03-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:36Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:36Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:24Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:24Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:47Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "2b175e88-5e7a-4265-b24f-9646e815c385"
+                },
+                "name": "job-a-04-large-bc360",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-04-large",
+                        "uid": "2b175e88-5e7a-4265-b24f-9646e815c385"
+                    }
+                ],
+                "resourceVersion": "4660",
+                "uid": "55cfe961-755a-4f35-9a10-77e89b642300"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-04-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-04-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-04-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:25Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:25Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:47Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "8d43d687-c369-49d0-aee9-aee40baa46b9"
+                },
+                "name": "job-a-05-large-5ac0f",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-05-large",
+                        "uid": "8d43d687-c369-49d0-aee9-aee40baa46b9"
+                    }
+                ],
+                "resourceVersion": "4490",
+                "uid": "0769dd1f-21f0-419c-a67f-c5664ba26741"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-05-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-05-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-05-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:37Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:51:37Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:24Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:24Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:47Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "22ea06d4-93c7-4aec-afdf-c759b42f2ccc"
+                },
+                "name": "job-a-06-large-78296",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-06-large",
+                        "uid": "22ea06d4-93c7-4aec-afdf-c759b42f2ccc"
+                    }
+                ],
+                "resourceVersion": "4838",
+                "uid": "c601eb62-4a02-42c7-81f2-43ab67f9581d"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-06-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-06-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-06-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:57:05Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:57:05Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:47Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "c0d38a8e-fa18-488c-90cd-530df52cd3f5"
+                },
+                "name": "job-a-07-large-804f7",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-07-large",
+                        "uid": "c0d38a8e-fa18-488c-90cd-530df52cd3f5"
+                    }
+                ],
+                "resourceVersion": "4647",
+                "uid": "9da138a5-53fe-435e-8b71-b57715532803"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-07-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-07-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-07-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:25Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:53:25Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:17Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:17Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T15:49:47Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "4985cef3-c0ae-433d-a391-7d04b2e87edd"
+                },
+                "name": "job-a-08-large-46cdb",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "a-08-large",
+                        "uid": "4985cef3-c0ae-433d-a391-7d04b2e87edd"
+                    }
+                ],
+                "resourceVersion": "4850",
+                "uid": "a1f1eaf5-4f2e-4ffb-9c3d-fd2d70859168"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "a-08-large",
+                                    "gpuq.dev/run": "mix-large-strict-r1-1790869783",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "python",
+                                            "/code/train_job.py"
+                                        ],
+                                        "env": [
+                                            {
+                                                "name": "SIZE",
+                                                "value": "large"
+                                            },
+                                            {
+                                                "name": "STEPS",
+                                                "value": "1300"
+                                            },
+                                            {
+                                                "name": "JOB_NAME",
+                                                "value": "a-08-large"
+                                            },
+                                            {
+                                                "name": "CKPT_DIR",
+                                                "value": "/ckpt/a-08-large"
+                                            },
+                                            {
+                                                "name": "CKPT_EVERY_S",
+                                                "value": "0"
+                                            },
+                                            {
+                                                "name": "CKPT_ON_SIGTERM",
+                                                "value": "0"
+                                            }
+                                        ],
+                                        "image": "pytorch/pytorch:2.4.0-cuda12.1-cudnn9-runtime",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File",
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/code",
+                                                "name": "code"
+                                            },
+                                            {
+                                                "mountPath": "/ckpt",
+                                                "name": "ckpt"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "runtimeClassName": "nvidia",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 10,
+                                "volumes": [
+                                    {
+                                        "configMap": {
+                                            "defaultMode": 420,
+                                            "name": "train-job"
+                                        },
+                                        "name": "code"
+                                    },
+                                    {
+                                        "hostPath": {
+                                            "path": "/var/lib/gpuq/mix-large-strict-r1-1790869783",
+                                            "type": "DirectoryOrCreate"
+                                        },
+                                        "name": "ckpt"
+                                    }
+                                ]
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:55:18Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:57:06Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T15:57:06Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Recovered",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

@@ -1,0 +1,10 @@
+exp,n,variant,avg_jct_s_mean,avg_jct_s_sd,avg_wait_s_mean,avg_wait_s_sd,ckpt_overhead_s_mean,ckpt_overhead_s_sd,evictions_mean,evictions_sd,gpu_util_mean,gpu_util_sd,lost_s_mean,lost_s_sd,makespan_s_mean,makespan_s_sd,team_a_makespan_s_mean,team_a_makespan_s_sd,team_b_wait_s_mean,team_b_wait_s_sd
+mix,3,mixed-strict,149.13,13.16,96.1,9.33,,,,,93.07,2.96,,,246.77,19.31,,,,
+mix,3,mixed-borrow,167.43,17.35,60.7,5.72,,,,,98.0,0.4,,,239.4,8.14,,,,
+mix,3,small-strict,74.87,5.83,50.4,4.3,,,,,72.6,2.17,,,122.17,8.06,,,,
+mix,3,small-borrow,71.23,0.75,28.2,0.1,,,,,85.43,0.15,,,98.53,2.04,,,,
+mix,3,large-strict,269.93,2.67,167.37,1.67,,,,,94.67,0.25,,,436.2,3.8,,,,
+mix,3,large-borrow,321.03,3.61,111.53,0.74,,,,,97.67,0.15,,,430.3,5.9,,,,
+ckpt,3,none,,,,,0.0,0.0,2,0.0,,,177.93,3.02,,,352.87,1.15,4.93,0.32
+ckpt,3,periodic,,,,,1.02,0.23,2,0.0,,,11.63,4.76,,,308.87,2.01,4.57,0.55
+ckpt,3,periodic+sigterm,,,,,0.94,0.06,2,0.0,,,0.0,0.0,,,308.1,2.12,4.5,0.2

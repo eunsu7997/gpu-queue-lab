@@ -1,0 +1,16 @@
+{"event": "start", "job": "a-01-large", "size": "large", "t": 1790871874.454, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-01-large", "size": "large", "t": 1790872083.762, "attempt": 1, "step": 1300, "run_s": 209.31, "max_mem_mb": 429}
+{"event": "start", "job": "a-02-large", "size": "large", "t": 1790871874.599, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-02-large", "size": "large", "t": 1790872084.212, "attempt": 1, "step": 1300, "run_s": 209.61, "max_mem_mb": 429}
+{"event": "start", "job": "a-03-large", "size": "large", "t": 1790871874.781, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-03-large", "size": "large", "t": 1790872084.301, "attempt": 1, "step": 1300, "run_s": 209.52, "max_mem_mb": 429}
+{"event": "start", "job": "a-04-large", "size": "large", "t": 1790871874.946, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-04-large", "size": "large", "t": 1790872083.084, "attempt": 1, "step": 1300, "run_s": 208.14, "max_mem_mb": 429}
+{"event": "start", "job": "a-05-large", "size": "large", "t": 1790872091.545, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-05-large", "size": "large", "t": 1790872293.359, "attempt": 1, "step": 1300, "run_s": 201.81, "max_mem_mb": 429}
+{"event": "start", "job": "a-06-large", "size": "large", "t": 1790872091.257, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-06-large", "size": "large", "t": 1790872294.87, "attempt": 1, "step": 1300, "run_s": 203.61, "max_mem_mb": 429}
+{"event": "start", "job": "a-07-large", "size": "large", "t": 1790872091.256, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-07-large", "size": "large", "t": 1790872294.915, "attempt": 1, "step": 1300, "run_s": 203.66, "max_mem_mb": 429}
+{"event": "start", "job": "a-08-large", "size": "large", "t": 1790872091.498, "attempt": 1, "resume_step": 0, "steps_total": 1300, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "a-08-large", "size": "large", "t": 1790872295.039, "attempt": 1, "step": 1300, "run_s": 203.54, "max_mem_mb": 429}

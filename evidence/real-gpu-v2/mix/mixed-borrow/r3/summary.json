@@ -1,0 +1,95 @@
+{
+  "exp": "mix",
+  "variant": "mixed-borrow",
+  "rep": 3,
+  "run_id": "mix-mixed-borrow-r3-1790872533",
+  "ok": true,
+  "quota": "borrow",
+  "makespan_s": 230.2,
+  "team_a": {
+    "jobs": 8,
+    "makespan_s": 230.0,
+    "avg_jct_s": 147.4,
+    "avg_wait_s": 54.1
+  },
+  "team_b": {},
+  "gpu_util_avg": 98.0,
+  "gpu_mem_max_mb": 5860,
+  "evictions": 0,
+  "lost_s": 0.0,
+  "ckpt_overhead_s": 0.0,
+  "jobs": [
+    {
+      "job": "a-01-large",
+      "size": "large",
+      "team": "team-a",
+      "submitted": 0.2,
+      "wait_s": 3.1,
+      "jct_s": 169.4,
+      "attempts": 1
+    },
+    {
+      "job": "a-02-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 0.4,
+      "wait_s": 2.9,
+      "jct_s": 55.7,
+      "attempts": 1
+    },
+    {
+      "job": "a-03-medium",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 0.6,
+      "wait_s": 3.0,
+      "jct_s": 158.7,
+      "attempts": 1
+    },
+    {
+      "job": "a-04-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 0.9,
+      "wait_s": 2.9,
+      "jct_s": 56.9,
+      "attempts": 1
+    },
+    {
+      "job": "a-05-large",
+      "size": "large",
+      "team": "team-a",
+      "submitted": 1.1,
+      "wait_s": 62.3,
+      "jct_s": 209.6,
+      "attempts": 1
+    },
+    {
+      "job": "a-06-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 1.4,
+      "wait_s": 64.0,
+      "jct_s": 123.1,
+      "attempts": 1
+    },
+    {
+      "job": "a-07-medium",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 1.7,
+      "wait_s": 164.6,
+      "jct_s": 228.5,
+      "attempts": 1
+    },
+    {
+      "job": "a-08-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 2.0,
+      "wait_s": 129.9,
+      "jct_s": 177.5,
+      "attempts": 1
+    }
+  ]
+}

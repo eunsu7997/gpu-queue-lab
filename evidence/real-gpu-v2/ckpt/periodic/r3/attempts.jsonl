@@ -1,0 +1,64 @@
+{"event": "start", "job": "a-01", "size": "medium", "t": 1790876256.732, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876272.403, "attempt": 1, "step": 550, "save_s": 0.019}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876289.128, "attempt": 1, "step": 1050, "save_s": 0.012}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876305.75, "attempt": 1, "step": 1650, "save_s": 0.013}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876322.347, "attempt": 1, "step": 2150, "save_s": 0.018}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876339.031, "attempt": 1, "step": 2750, "save_s": 0.039}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876354.765, "attempt": 1, "step": 3350, "save_s": 0.047}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876371.491, "attempt": 1, "step": 3950, "save_s": 0.013}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876387.905, "attempt": 1, "step": 4450, "save_s": 0.018}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876404.731, "attempt": 1, "step": 5050, "save_s": 0.016}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876421.263, "attempt": 1, "step": 5550, "save_s": 0.015}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876437.997, "attempt": 1, "step": 6150, "save_s": 0.017}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876454.25, "attempt": 1, "step": 6650, "save_s": 0.015}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876469.821, "attempt": 1, "step": 7300, "save_s": 0.018}
+{"event": "ckpt", "job": "a-01", "size": "medium", "t": 1790876485.263, "attempt": 1, "step": 7900, "save_s": 0.016}
+{"event": "end", "job": "a-01", "size": "medium", "t": 1790876487.961, "attempt": 1, "step": 8000, "run_s": 231.23, "max_mem_mb": 130}
+{"event": "start", "job": "a-02", "size": "medium", "t": 1790876256.736, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876272.375, "attempt": 1, "step": 550, "save_s": 0.017}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876289.106, "attempt": 1, "step": 1050, "save_s": 0.015}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876305.73, "attempt": 1, "step": 1650, "save_s": 0.014}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876322.322, "attempt": 1, "step": 2150, "save_s": 0.014}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876338.98, "attempt": 1, "step": 2750, "save_s": 0.016}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876354.791, "attempt": 1, "step": 3350, "save_s": 0.079}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876371.525, "attempt": 1, "step": 3950, "save_s": 0.017}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876387.941, "attempt": 1, "step": 4450, "save_s": 0.021}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876404.777, "attempt": 1, "step": 5050, "save_s": 0.018}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876421.307, "attempt": 1, "step": 5550, "save_s": 0.015}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876438.035, "attempt": 1, "step": 6150, "save_s": 0.012}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876454.286, "attempt": 1, "step": 6650, "save_s": 0.015}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876469.834, "attempt": 1, "step": 7300, "save_s": 0.018}
+{"event": "ckpt", "job": "a-02", "size": "medium", "t": 1790876485.332, "attempt": 1, "step": 7900, "save_s": 0.015}
+{"event": "end", "job": "a-02", "size": "medium", "t": 1790876488.017, "attempt": 1, "step": 8000, "run_s": 231.28, "max_mem_mb": 130}
+{"event": "start", "job": "a-03", "size": "medium", "t": 1790876256.912, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876272.866, "attempt": 1, "step": 550, "save_s": 0.028}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876289.588, "attempt": 1, "step": 1050, "save_s": 0.018}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876306.217, "attempt": 1, "step": 1650, "save_s": 0.014}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876322.793, "attempt": 1, "step": 2150, "save_s": 0.017}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876339.458, "attempt": 1, "step": 2750, "save_s": 0.017}
+{"event": "sigterm", "job": "a-03", "size": "medium", "t": 1790876345.155, "attempt": 1, "step": 2881, "saved_s": null, "run_s": 88.24}
+{"event": "start", "job": "a-03", "size": "medium", "t": 1790876475.444, "attempt": 2, "resume_step": 2750, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876491.216, "attempt": 2, "step": 3450, "save_s": 0.015}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876506.943, "attempt": 2, "step": 4400, "save_s": 0.016}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876522.908, "attempt": 2, "step": 5550, "save_s": 0.014}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876538.913, "attempt": 2, "step": 6500, "save_s": 0.018}
+{"event": "ckpt", "job": "a-03", "size": "medium", "t": 1790876554.438, "attempt": 2, "step": 7600, "save_s": 0.017}
+{"event": "end", "job": "a-03", "size": "medium", "t": 1790876560.242, "attempt": 2, "step": 8000, "run_s": 84.8, "max_mem_mb": 136}
+{"event": "start", "job": "a-04", "size": "medium", "t": 1790876257.146, "attempt": 1, "resume_step": 0, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876273.225, "attempt": 1, "step": 550, "save_s": 0.023}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876289.928, "attempt": 1, "step": 1050, "save_s": 0.015}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876306.571, "attempt": 1, "step": 1650, "save_s": 0.019}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876323.137, "attempt": 1, "step": 2150, "save_s": 0.029}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876339.828, "attempt": 1, "step": 2750, "save_s": 0.028}
+{"event": "sigterm", "job": "a-04", "size": "medium", "t": 1790876344.149, "attempt": 1, "step": 2820, "saved_s": null, "run_s": 87.0}
+{"event": "start", "job": "a-04", "size": "medium", "t": 1790876477.274, "attempt": 2, "resume_step": 2750, "steps_total": 8000, "ckpt_every_s": 15.0, "ckpt_on_sigterm": false}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876493.053, "attempt": 2, "step": 3500, "save_s": 0.016}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876508.862, "attempt": 2, "step": 4450, "save_s": 0.017}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876524.163, "attempt": 2, "step": 5550, "save_s": 0.025}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876539.455, "attempt": 2, "step": 6450, "save_s": 0.013}
+{"event": "ckpt", "job": "a-04", "size": "medium", "t": 1790876554.962, "attempt": 2, "step": 7550, "save_s": 0.012}
+{"event": "end", "job": "a-04", "size": "medium", "t": 1790876560.752, "attempt": 2, "step": 8000, "run_s": 83.48, "max_mem_mb": 136}
+{"event": "start", "job": "b-01", "size": "medium", "t": 1790876347.615, "attempt": 1, "resume_step": 0, "steps_total": 4000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "b-01", "size": "medium", "t": 1790876466.358, "attempt": 1, "step": 4000, "run_s": 118.74, "max_mem_mb": 130}
+{"event": "start", "job": "b-02", "size": "medium", "t": 1790876348.639, "attempt": 1, "resume_step": 0, "steps_total": 4000, "ckpt_every_s": 0.0, "ckpt_on_sigterm": false}
+{"event": "end", "job": "b-02", "size": "medium", "t": 1790876467.624, "attempt": 1, "step": 4000, "run_s": 118.98, "max_mem_mb": 130}
