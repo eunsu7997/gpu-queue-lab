@@ -17,6 +17,10 @@ class JobTest(unittest.TestCase):
         ctr = j["spec"]["template"]["spec"]["containers"][0]
         self.assertEqual(ctr["resources"]["limits"]["nvidia.com/gpu"], "2")
 
+    def test_kwok_delay_matches_duration(self):
+        j = jobs.build_job("x", "team-a", duration=90)
+        self.assertEqual(j["spec"]["template"]["metadata"]["annotations"][jobs.KWOK_DELAY_ANNOTATION], "90s")
+
     def test_batch_names_are_numbered(self):
         names = [j["metadata"]["name"] for j in jobs.build_batch("team-b", 3, prefix="s1")]
         self.assertEqual(names, ["s1-01", "s1-02", "s1-03"])

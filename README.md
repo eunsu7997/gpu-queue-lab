@@ -57,6 +57,20 @@ python -m gpuq report
 실험 시나리오(S1 빌려 쓰기, S2 돌려받기, S3 우선순위 선점, S4 비교)는 [docs/experiments.md](docs/experiments.md)에 있습니다.
 각 시나리오 후 `scripts/capture.ps1 -Name s1`이 `evidence/s1/`에 증거를 저장합니다.
 
+## 시뮬레이션 모드 (KWOK, Linux / WSL2)
+
+Docker 안에 노드를 못 띄우는 환경(CI, 클라우드 샌드박스)에서도 같은 실험을 돌리는 방법입니다.
+
+- 진짜 kube-apiserver, kube-scheduler, controller-manager와 **진짜 Kueue v0.20.0 컨트롤러**를 띄우고, kubelet 대신 [KWOK](https://kwok.sigs.k8s.io/)가 가짜 노드 2대(각 GPU 2개)를 흉내 냅니다.
+- 그래서 **어떤 작업을 언제 받아 주고 누구를 선점할지는 실제 Kueue의 판단**이고, 컨테이너 실행만 시뮬레이션입니다. Pod는 `--duration`만큼 Running으로 있다가 끝납니다 ([kwok/stages.yaml](kwok/stages.yaml)).
+
+```bash
+sim/up.sh                 # kwokctl, kueue 바이너리 받고 클러스터 + 큐 구성
+export KUBECONFIG=/tmp/gpuq-sim/kubeconfig
+sim/run-all.sh            # S1~S4 자동 실행, evidence/sim/에 결과 저장 (약 14분)
+sim/down.sh
+```
+
 ## 테스트
 
 ```powershell
@@ -65,14 +79,27 @@ python -m unittest discover -s tests -v
 
 `tests/fixtures/workloads.json`은 Kueue Workload 형식에 맞춰 손으로 만든 예시입니다. 실제 클러스터에서 S2를 돌린 뒤 `evidence/s2/workloads.json`으로 교체하면 더 좋습니다.
 
+## 결과 (시뮬레이션 모드)
+
+| 지표 | 빌려 쓰기 있음 | 엄격한 할당량 |
+|---|---|---|
+| 작업 4개 완료 시간 | **121초** | 243초 |
+| 평균 GPU 사용률 | **98%** | 50% |
+| 주인 팀 GPU 회수 시간 (선점) | **1~2초** | - |
+| high 작업 대기시간 (선점) | **1초** | - |
+
+![utilization](evidence/sim/s1-vs-s4-utilization.png)
+
+자세한 내용과 원본 증거: [evidence/sim/RESULTS.md](evidence/sim/RESULTS.md)
+
 ## 진행 상황
 
 | 단계 | 상태 |
 |---|---|
 | Kueue 매니페스트 작성 + v0.20.0 CRD 스키마 검증 | ✅ 완료 |
 | `gpuq` 제출/리포트 도구 + 단위 테스트 | ✅ 완료 |
-| kind 클러스터 + 가짜 GPU 등록 | ⬜ NOT VERIFIED |
-| S1~S4 실험 | ⬜ NOT VERIFIED |
+| S1~S4 실험 (KWOK 시뮬레이션, 실제 Kueue 컨트롤러) | ✅ VERIFIED |
+| kind 클러스터 + 가짜 GPU 등록 (Windows) | ⬜ NOT VERIFIED |
 | 실제 GPU time-slicing | ⬜ NOT VERIFIED |
 
 > 실제로 돌려서 확인한 항목만 완료로 바꿉니다.

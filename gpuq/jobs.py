@@ -7,6 +7,10 @@ GPU_RESOURCE = "nvidia.com/gpu"
 
 FAKE_IMAGE = "busybox:1.36"
 
+# Read by the KWOK pod-complete stage (kwok/stages.yaml) so simulated pods
+# "run" for the same duration a real container would. Ignored elsewhere.
+KWOK_DELAY_ANNOTATION = "pod-complete.stage.kwok.x-k8s.io/delay"
+
 
 def build_job(name, team, gpus=1, duration=60, priority="low",
               queue="gpu-queue", image=FAKE_IMAGE, command=None, run_label=None):
@@ -32,7 +36,10 @@ def build_job(name, team, gpus=1, duration=60, priority="low",
             "suspend": True,  # Kueue unsuspends the Job when it is admitted
             "backoffLimit": 0,
             "template": {
-                "metadata": {"labels": {"gpuq.dev/team": team}},
+                "metadata": {
+                    "labels": {"gpuq.dev/team": team},
+                    "annotations": {KWOK_DELAY_ANNOTATION: f"{int(duration)}s"},
+                },
                 "spec": {
                     "restartPolicy": "Never",
                     "terminationGracePeriodSeconds": 5,

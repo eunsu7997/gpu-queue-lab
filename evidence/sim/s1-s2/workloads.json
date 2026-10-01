@@ -1,0 +1,929 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:58:53Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "ce6f4838-d1da-440f-acd6-90e67bf35276"
+                },
+                "name": "job-s1-a-01-11635",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s1-a-01",
+                        "uid": "ce6f4838-d1da-440f-acd6-90e67bf35276"
+                    }
+                ],
+                "resourceVersion": "4160",
+                "uid": "d31020f9-2935-4b92-b91a-0215e08b3ec9"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "120s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s1-a-01",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s1-a-01\"; sleep 120; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:53Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:53Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:54Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:54Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:58:53Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "a51f2a89-fbc5-47b8-aef5-b61e6cf0cea9"
+                },
+                "name": "job-s1-a-02-a2320",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s1-a-02",
+                        "uid": "a51f2a89-fbc5-47b8-aef5-b61e6cf0cea9"
+                    }
+                ],
+                "resourceVersion": "4302",
+                "uid": "1db689ff-3330-4d72-a772-d2959f2e4536"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "120s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s1-a-02",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s1-a-02\"; sleep 120; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "accumulatedPastExecutionTimeSeconds": 31,
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:26Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:26Z",
+                        "message": "Previously: Preempted to accommodate a workload (UID: 255f47e5-f138-4028-a784-ceb9eb01cc6c, JobUID: 8e73496a-b30d-4dd4-9eca-23cc62e6aeff) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "False",
+                        "type": "Evicted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:26Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:26Z",
+                        "message": "Previously: Preempted to accommodate a workload (UID: 255f47e5-f138-4028-a784-ceb9eb01cc6c, JobUID: 8e73496a-b30d-4dd4-9eca-23cc62e6aeff) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "False",
+                        "type": "Preempted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:24Z",
+                        "message": "Preempted to accommodate a workload (UID: 255f47e5-f138-4028-a784-ceb9eb01cc6c, JobUID: 8e73496a-b30d-4dd4-9eca-23cc62e6aeff) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "Preempted",
+                        "status": "True",
+                        "type": "Requeued"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:02:27Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:27Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ],
+                "schedulingStats": {
+                    "evictions": [
+                        {
+                            "count": 1,
+                            "reason": "Preempted",
+                            "underlyingCause": ""
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:58:53Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "96a07b34-96bf-410a-81de-e0da27fc34f6"
+                },
+                "name": "job-s1-a-03-7ddb8",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s1-a-03",
+                        "uid": "96a07b34-96bf-410a-81de-e0da27fc34f6"
+                    }
+                ],
+                "resourceVersion": "4315",
+                "uid": "28a1abc1-e405-42b6-9873-8a0b7b35365e"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "120s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s1-a-03",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s1-a-03\"; sleep 120; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "accumulatedPastExecutionTimeSeconds": 32,
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:27Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:27Z",
+                        "message": "Previously: Preempted to accommodate a workload (UID: 2a833217-d9c8-4e9d-a8cd-eb98d862554a, JobUID: fe239855-686a-4ab5-974c-ef89b7c55d1a) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "False",
+                        "type": "Evicted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:27Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:27Z",
+                        "message": "Previously: Preempted to accommodate a workload (UID: 2a833217-d9c8-4e9d-a8cd-eb98d862554a, JobUID: fe239855-686a-4ab5-974c-ef89b7c55d1a) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "False",
+                        "type": "Preempted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:25Z",
+                        "message": "Preempted to accommodate a workload (UID: 2a833217-d9c8-4e9d-a8cd-eb98d862554a, JobUID: fe239855-686a-4ab5-974c-ef89b7c55d1a) due to reclamation within the cohort; preemptor path: /gpu-pool/team-b-cq; preemptee path: /gpu-pool/team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "Preempted",
+                        "status": "True",
+                        "type": "Requeued"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:02:28Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:28Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ],
+                "schedulingStats": {
+                    "evictions": [
+                        {
+                            "count": 1,
+                            "reason": "Preempted",
+                            "underlyingCause": ""
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:58:53Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "b27ab032-3e35-4589-985a-9ad91e86568b"
+                },
+                "name": "job-s1-a-04-a5354",
+                "namespace": "team-a",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s1-a-04",
+                        "uid": "b27ab032-3e35-4589-985a-9ad91e86568b"
+                    }
+                ],
+                "resourceVersion": "4168",
+                "uid": "bc3595bd-9c6a-4f5d-85f4-45e42abd93e1"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "120s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s1-a-04",
+                                    "gpuq.dev/team": "team-a"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s1-a-04\"; sleep 120; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-a-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:53Z",
+                        "message": "Quota reserved in ClusterQueue team-a-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:53Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:54Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:58:54Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:59:23Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "8e73496a-b30d-4dd4-9eca-23cc62e6aeff"
+                },
+                "name": "job-s2-b-01-ca40e",
+                "namespace": "team-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s2-b-01",
+                        "uid": "8e73496a-b30d-4dd4-9eca-23cc62e6aeff"
+                    }
+                ],
+                "resourceVersion": "4065",
+                "uid": "255f47e5-f138-4028-a784-ceb9eb01cc6c"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "60s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s2-b-01",
+                                    "gpuq.dev/team": "team-b"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s2-b-01\"; sleep 60; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-b-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:24Z",
+                        "message": "Quota reserved in ClusterQueue team-b-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:24Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:25Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:25Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "kueue.x-k8s.io/v1beta2",
+            "kind": "Workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-01T02:59:23Z",
+                "generation": 1,
+                "labels": {
+                    "kueue.x-k8s.io/job-uid": "fe239855-686a-4ab5-974c-ef89b7c55d1a"
+                },
+                "name": "job-s2-b-02-309e8",
+                "namespace": "team-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "batch/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Job",
+                        "name": "s2-b-02",
+                        "uid": "fe239855-686a-4ab5-974c-ef89b7c55d1a"
+                    }
+                ],
+                "resourceVersion": "4090",
+                "uid": "2a833217-d9c8-4e9d-a8cd-eb98d862554a"
+            },
+            "spec": {
+                "active": true,
+                "podSets": [
+                    {
+                        "count": 1,
+                        "name": "main",
+                        "template": {
+                            "metadata": {
+                                "annotations": {
+                                    "pod-complete.stage.kwok.x-k8s.io/delay": "60s"
+                                },
+                                "labels": {
+                                    "batch.kubernetes.io/job-name": "s2-b-02",
+                                    "gpuq.dev/team": "team-b"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "command": [
+                                            "sh",
+                                            "-c",
+                                            "echo \"start $(date +%s) s2-b-02\"; sleep 60; echo \"end $(date +%s)\""
+                                        ],
+                                        "image": "busybox:1.36",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "train",
+                                        "resources": {
+                                            "limits": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi",
+                                                "nvidia.com/gpu": "1"
+                                            },
+                                            "requests": {
+                                                "cpu": "100m",
+                                                "memory": "64Mi"
+                                            }
+                                        },
+                                        "terminationMessagePath": "/dev/termination-log",
+                                        "terminationMessagePolicy": "File"
+                                    }
+                                ],
+                                "dnsPolicy": "ClusterFirst",
+                                "restartPolicy": "Never",
+                                "schedulerName": "default-scheduler",
+                                "securityContext": {},
+                                "terminationGracePeriodSeconds": 5
+                            }
+                        },
+                        "topologyRequest": {
+                            "podIndexLabel": "batch.kubernetes.io/job-completion-index"
+                        }
+                    }
+                ],
+                "priority": 100,
+                "priorityClassRef": {
+                    "group": "kueue.x-k8s.io",
+                    "kind": "WorkloadPriorityClass",
+                    "name": "low"
+                },
+                "queueName": "gpu-queue"
+            },
+            "status": {
+                "admission": {
+                    "clusterQueue": "team-b-cq",
+                    "podSetAssignments": [
+                        {
+                            "count": 1,
+                            "flavors": {
+                                "cpu": "gpu-node",
+                                "memory": "gpu-node",
+                                "nvidia.com/gpu": "gpu-node"
+                            },
+                            "name": "main",
+                            "resourceUsage": {
+                                "cpu": "100m",
+                                "memory": "64Mi",
+                                "nvidia.com/gpu": "1"
+                            }
+                        }
+                    ]
+                },
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:25Z",
+                        "message": "Quota reserved in ClusterQueue team-b-cq",
+                        "observedGeneration": 1,
+                        "reason": "QuotaReserved",
+                        "status": "True",
+                        "type": "QuotaReserved"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:25Z",
+                        "message": "The workload is admitted",
+                        "observedGeneration": 1,
+                        "reason": "Admitted",
+                        "status": "True",
+                        "type": "Admitted"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T03:00:26Z",
+                        "message": "Reached expected number of succeeded pods",
+                        "observedGeneration": 1,
+                        "reason": "Succeeded",
+                        "status": "True",
+                        "type": "Finished"
+                    },
+                    {
+                        "lastTransitionTime": "2026-10-01T02:59:26Z",
+                        "message": "All pods reached readiness and the workload is running",
+                        "observedGeneration": 1,
+                        "reason": "Started",
+                        "status": "True",
+                        "type": "PodsReady"
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
