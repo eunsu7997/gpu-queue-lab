@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 D=${D:-120}          # job duration for S1/S4
-OUT=evidence/sim
+OUT=${OUT:-evidence/sim}   # evidence/kind for the kind run
 
 reset() {
   kubectl delete jobs --all -n team-a --wait=true >/dev/null

@@ -1,0 +1,3 @@
+NAME        COHORT   STRATEGY         PENDING WORKLOADS   ADMITTED WORKLOADS   ACTIVE   REASON
+team-a-cq            BestEffortFIFO   0                   0                    True     Ready
+team-b-cq            BestEffortFIFO   0                   0                    True     Ready
