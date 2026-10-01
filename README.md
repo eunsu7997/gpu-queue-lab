@@ -92,6 +92,8 @@ python -m unittest discover -s tests -v
 
 자세한 내용과 원본 증거: [evidence/sim/RESULTS.md](evidence/sim/RESULTS.md)
 
+Windows kind 클러스터(진짜 kubelet, 가짜 GPU)에서도 같은 결과가 나왔습니다: 완료 124초 vs 250초, 사용률 98% vs 50% ([evidence/kind/RESULTS.md](evidence/kind/RESULTS.md)).
+
 ## 진행 상황
 
 | 단계 | 상태 |
@@ -99,7 +101,7 @@ python -m unittest discover -s tests -v
 | Kueue 매니페스트 작성 + v0.20.0 CRD 스키마 검증 | ✅ 완료 |
 | `gpuq` 제출/리포트 도구 + 단위 테스트 | ✅ 완료 |
 | S1~S4 실험 (KWOK 시뮬레이션, 실제 Kueue 컨트롤러) | ✅ VERIFIED |
-| kind 클러스터 + 가짜 GPU 등록 (Windows) | ⬜ NOT VERIFIED |
+| kind 클러스터 + 가짜 GPU 등록, S1~S4 재현 (Windows) | ✅ VERIFIED ([결과](evidence/kind/RESULTS.md)) |
 | 실제 GPU time-slicing | ⬜ NOT VERIFIED |
 
 > 실제로 돌려서 확인한 항목만 완료로 바꿉니다.

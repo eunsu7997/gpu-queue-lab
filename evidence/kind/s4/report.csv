@@ -1,0 +1,5 @@
+job,team,priority,gpus,state,cluster_queue,created,wait_s,run_s,evictions
+s4-a-01,team-a,low,1,Finished,team-a-cq,2026-10-01T13:52:56,0.0,124.0,0
+s4-a-02,team-a,low,1,Finished,team-a-cq,2026-10-01T13:52:56,0.0,124.0,0
+s4-a-03,team-a,low,1,Finished,team-a-cq,2026-10-01T13:52:56,125.0,125.0,0
+s4-a-04,team-a,low,1,Finished,team-a-cq,2026-10-01T13:52:56,125.0,125.0,0
