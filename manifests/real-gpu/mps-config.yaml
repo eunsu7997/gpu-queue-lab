@@ -1,0 +1,14 @@
+# NOT VERIFIED HERE: CUDA MPS does not start on WSL2 (see evidence/real-gpu-v2/mps/).
+# For a native Linux GPU node. Same "1 GPU = 4 nvidia.com/gpu" as time-slicing, but the
+# 4 processes share one CUDA context through the MPS server, so kernels from different
+# jobs can run on the GPU at the same time, and each client gets a memory and SM limit.
+#   helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
+#   helm install nvdp nvdp/nvidia-device-plugin -n kube-system --version 0.17.1 \
+#     --set-file config.map.config=manifests/real-gpu/mps-config.yaml
+# The chart then also runs the MPS control daemon on the node.
+version: v1
+sharing:
+  mps:
+    resources:
+      - name: nvidia.com/gpu
+        replicas: 4

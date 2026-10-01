@@ -1,0 +1,95 @@
+{
+  "exp": "mix",
+  "variant": "mixed-strict",
+  "rep": 2,
+  "run_id": "mix-mixed-strict-r2-1790870671",
+  "ok": true,
+  "quota": "strict",
+  "makespan_s": 254.1,
+  "team_a": {
+    "jobs": 8,
+    "makespan_s": 253.9,
+    "avg_jct_s": 149.7,
+    "avg_wait_s": 95.3
+  },
+  "team_b": {},
+  "gpu_util_avg": 90.5,
+  "gpu_mem_max_mb": 3780,
+  "evictions": 0,
+  "lost_s": 0.0,
+  "ckpt_overhead_s": 0.0,
+  "jobs": [
+    {
+      "job": "a-01-large",
+      "size": "large",
+      "team": "team-a",
+      "submitted": 0.2,
+      "wait_s": 2.8,
+      "jct_s": 90.8,
+      "attempts": 1
+    },
+    {
+      "job": "a-02-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 0.4,
+      "wait_s": 2.6,
+      "jct_s": 28.4,
+      "attempts": 1
+    },
+    {
+      "job": "a-03-medium",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 0.6,
+      "wait_s": 34.3,
+      "jct_s": 110.9,
+      "attempts": 1
+    },
+    {
+      "job": "a-04-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 0.9,
+      "wait_s": 120.0,
+      "jct_s": 142.3,
+      "attempts": 1
+    },
+    {
+      "job": "a-05-large",
+      "size": "large",
+      "team": "team-a",
+      "submitted": 1.1,
+      "wait_s": 129.9,
+      "jct_s": 220.7,
+      "attempts": 1
+    },
+    {
+      "job": "a-06-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 1.4,
+      "wait_s": 96.3,
+      "jct_s": 122.2,
+      "attempts": 1
+    },
+    {
+      "job": "a-07-medium",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 1.6,
+      "wait_s": 150.3,
+      "jct_s": 230.2,
+      "attempts": 1
+    },
+    {
+      "job": "a-08-small",
+      "size": "small",
+      "team": "team-a",
+      "submitted": 1.8,
+      "wait_s": 226.4,
+      "jct_s": 252.3,
+      "attempts": 1
+    }
+  ]
+}

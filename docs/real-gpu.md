@@ -41,3 +41,16 @@ python -m gpuq submit --team team-a --count 4 --prefix gpu-a `
 
 기본 명령은 sleep이므로, 실제 학습을 돌리려면 `gpuq/jobs.py`의 `command`에 작은 PyTorch 학습 스크립트(예: MNIST 1 epoch)를 넣습니다.
 측정 포인트: time-slicing 1개 작업 단독 vs 4개 동시 실행 시 작업당 학습 시간.
+
+## 4. v2: 크기가 섞인 학습 작업, 체크포인트, 3회 반복
+
+`tools/train_job.py`(크기 small/medium/large, 주기 저장과 SIGTERM 저장 지원)와 `tools/v2_run.py`(Kueue로 제출하고 지표 계산)로 보완 실험을 했습니다.
+
+```bash
+wsl -d Ubuntu-24.04 -- bash /mnt/c/work/gpu-queue-lab/scripts/wsl/setup-v2.sh     # time-slicing + Kueue + 큐
+wsl -d Ubuntu-24.04 -- bash /mnt/c/work/gpu-queue-lab/scripts/wsl/run-v2.sh mix   # 18회, 약 80분
+wsl -d Ubuntu-24.04 -- bash /mnt/c/work/gpu-queue-lab/scripts/wsl/run-v2.sh ckpt  # 9회, 약 50분
+python tools/v2_aggregate.py
+```
+
+결과: [evidence/real-gpu-v2/RESULTS.md](../evidence/real-gpu-v2/RESULTS.md)

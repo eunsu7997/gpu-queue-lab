@@ -94,6 +94,23 @@ python -m unittest discover -s tests -v
 
 Windows kind 클러스터(진짜 kubelet, 가짜 GPU)에서도 같은 결과가 나왔습니다: 완료 124초 vs 250초, 사용률 98% vs 50% ([evidence/kind/RESULTS.md](evidence/kind/RESULTS.md)).
 
+## 결과 (실제 RTX 4060, 진짜 PyTorch 학습, 3회 반복)
+
+가짜 GPU 결과가 "설정만 봐도 예상되는 숫자"라는 약점을 보완하려고, 실제 GPU에서 크기가 다른 학습 작업으로 다시 쟀습니다 (평균 ± 표준편차, n=3).
+
+| 실험 | 결과 |
+|---|---|
+| 빌려 쓰기 vs 고정 할당, 작은 작업 8개 | 완료 122초 → **99초 (-19%)**, GPU 사용률 73% → 85% |
+| 빌려 쓰기 vs 고정 할당, 큰 작업 8개 | 완료 436초 → 430초 (**-1%**), 작업당 완료는 오히려 **+19%** |
+| 선점 손실, 체크포인트 없음 → 15초마다 저장 → +SIGTERM 때 저장 | 다시 한 학습 **178초 → 12초 → 0초**, team-a 완료 353초 → 308초 (-13%) |
+| MPS vs time-slicing | WSL2에서는 MPS 데몬이 안 뜸 (증거 저장, 리눅스용 설정 준비) |
+
+GPU 1장을 time-slicing으로 나눈 칸을 빌려 주는 건, GPU를 덜 쓰는 작업에서만 이득이었습니다. 큰 작업은 칸 수가 아니라 실제 GPU 수만큼만 빨라집니다.
+
+![mix](evidence/real-gpu-v2/mix-makespan.png)
+
+자세한 내용과 원본: [evidence/real-gpu-v2/RESULTS.md](evidence/real-gpu-v2/RESULTS.md)
+
 ## 진행 상황
 
 | 단계 | 상태 |
@@ -103,5 +120,8 @@ Windows kind 클러스터(진짜 kubelet, 가짜 GPU)에서도 같은 결과가 
 | S1~S4 실험 (KWOK 시뮬레이션, 실제 Kueue 컨트롤러) | ✅ VERIFIED |
 | kind 클러스터 + 가짜 GPU 등록, S1~S4 재현 (Windows) | ✅ VERIFIED ([결과](evidence/kind/RESULTS.md)) |
 | 실제 GPU time-slicing (RTX 4060, k3s on WSL2) | ✅ VERIFIED ([결과](evidence/real-gpu/RESULTS.md)) |
+| 실제 학습 작업 섞어 빌려 쓰기 vs 고정 할당, 3회 반복 | ✅ VERIFIED ([결과](evidence/real-gpu-v2/RESULTS.md)) |
+| 체크포인트로 선점 손실 줄이기 (주기 저장 + SIGTERM 저장) | ✅ VERIFIED ([결과](evidence/real-gpu-v2/RESULTS.md#2-체크포인트로-선점-손실-줄이기)) |
+| MPS vs time-slicing | ⛔ WSL2 미지원 확인, 네이티브 리눅스에서 할 일 ([증거](evidence/real-gpu-v2/mps/mps-check.txt)) |
 
 > 실제로 돌려서 확인한 항목만 완료로 바꿉니다.

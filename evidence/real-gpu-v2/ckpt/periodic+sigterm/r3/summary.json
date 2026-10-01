@@ -1,0 +1,82 @@
+{
+  "exp": "ckpt",
+  "variant": "periodic+sigterm",
+  "rep": 3,
+  "run_id": "ckpt-periodic-sigterm-r3-1790876566",
+  "ok": true,
+  "quota": "borrow",
+  "makespan_s": 307.6,
+  "team_a": {
+    "jobs": 4,
+    "makespan_s": 306.5,
+    "avg_jct_s": 269.7,
+    "avg_wait_s": 3.7
+  },
+  "team_b": {
+    "jobs": 2,
+    "makespan_s": 125.4,
+    "avg_jct_s": 124.6,
+    "avg_wait_s": 4.7
+  },
+  "gpu_util_avg": 98.9,
+  "gpu_mem_max_mb": 3912,
+  "evictions": 2,
+  "lost_s": 0.0,
+  "ckpt_overhead_s": 0.92,
+  "jobs": [
+    {
+      "job": "a-01",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 1.1,
+      "wait_s": 5.0,
+      "jct_s": 236.2,
+      "attempts": 1
+    },
+    {
+      "job": "a-02",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 2.9,
+      "wait_s": 3.2,
+      "jct_s": 303.7,
+      "attempts": 2
+    },
+    {
+      "job": "a-03",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 3.1,
+      "wait_s": 3.2,
+      "jct_s": 234.6,
+      "attempts": 1
+    },
+    {
+      "job": "a-04",
+      "size": "medium",
+      "team": "team-a",
+      "submitted": 3.4,
+      "wait_s": 3.2,
+      "jct_s": 304.2,
+      "attempts": 2
+    },
+    {
+      "job": "b-01",
+      "size": "medium",
+      "team": "team-b",
+      "submitted": 90.3,
+      "wait_s": 4.1,
+      "jct_s": 123.9,
+      "attempts": 1
+    },
+    {
+      "job": "b-02",
+      "size": "medium",
+      "team": "team-b",
+      "submitted": 90.5,
+      "wait_s": 5.2,
+      "jct_s": 125.2,
+      "attempts": 1
+    }
+  ]
+}
