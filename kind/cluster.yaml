@@ -1,0 +1,14 @@
+# 1 control-plane + 2 "GPU" workers.
+# Workers get a fake nvidia.com/gpu capacity in scripts/01-fake-gpu.ps1,
+# so the whole scheduling experiment runs on a laptop without a GPU.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: gpuq
+nodes:
+  - role: control-plane
+  - role: worker
+    labels:
+      gpuq.dev/gpu-node: "true"
+  - role: worker
+    labels:
+      gpuq.dev/gpu-node: "true"

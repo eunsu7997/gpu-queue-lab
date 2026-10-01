@@ -1,0 +1,14 @@
+# Referenced from Jobs with the label kueue.x-k8s.io/priority-class.
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: WorkloadPriorityClass
+metadata:
+  name: low
+value: 100
+description: "Batch / experiment jobs. Can be preempted."
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: WorkloadPriorityClass
+metadata:
+  name: high
+value: 1000
+description: "Deadline jobs. May preempt low jobs in the same queue."

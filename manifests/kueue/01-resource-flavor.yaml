@@ -1,0 +1,9 @@
+# One flavor for the (fake or real) GPU nodes.
+# Kueue injects nodeLabels as a nodeSelector into admitted pods.
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ResourceFlavor
+metadata:
+  name: gpu-node
+spec:
+  nodeLabels:
+    gpuq.dev/gpu-node: "true"

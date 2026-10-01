@@ -1,0 +1,40 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "metadata": {"name": "job-team-a-low-01-abc", "namespace": "team-a", "creationTimestamp": "2026-10-01T10:00:00Z",
+                   "ownerReferences": [{"kind": "Job", "name": "team-a-low-01"}]},
+      "spec": {"queueName": "gpu-queue", "priorityClassRef": {"name": "low"},
+               "podSets": [{"name": "main", "count": 1, "template": {"spec": {"containers": [
+                 {"name": "train", "resources": {"limits": {"nvidia.com/gpu": "1"}}}]}}}]},
+      "status": {"admission": {"clusterQueue": "team-a-cq"},
+                 "conditions": [
+                   {"type": "QuotaReserved", "status": "True", "lastTransitionTime": "2026-10-01T10:00:01Z"},
+                   {"type": "Admitted", "status": "True", "lastTransitionTime": "2026-10-01T10:00:01Z"},
+                   {"type": "Finished", "status": "True", "lastTransitionTime": "2026-10-01T10:01:01Z"}]}
+    },
+    {
+      "metadata": {"name": "job-team-a-low-03-def", "namespace": "team-a", "creationTimestamp": "2026-10-01T10:00:00Z",
+                   "ownerReferences": [{"kind": "Job", "name": "team-a-low-03"}]},
+      "spec": {"queueName": "gpu-queue", "priorityClassRef": {"name": "low"},
+               "podSets": [{"name": "main", "count": 1, "template": {"spec": {"containers": [
+                 {"name": "train", "resources": {"limits": {"nvidia.com/gpu": "1"}}}]}}}]},
+      "status": {"conditions": [
+                   {"type": "QuotaReserved", "status": "False", "lastTransitionTime": "2026-10-01T10:00:30Z"},
+                   {"type": "Admitted", "status": "False", "lastTransitionTime": "2026-10-01T10:00:30Z", "reason": "Preempted"},
+                   {"type": "Evicted", "status": "True", "lastTransitionTime": "2026-10-01T10:00:30Z", "reason": "Preempted"}],
+                 "schedulingStats": {"evictions": [{"reason": "Preempted", "underlyingCause": "InCohortReclamation", "count": 1}]}}
+    },
+    {
+      "metadata": {"name": "job-team-b-low-01-ghi", "namespace": "team-b", "creationTimestamp": "2026-10-01T10:00:20Z",
+                   "ownerReferences": [{"kind": "Job", "name": "team-b-low-01"}]},
+      "spec": {"queueName": "gpu-queue", "priorityClassRef": {"name": "low"},
+               "podSets": [{"name": "main", "count": 2, "template": {"spec": {"containers": [
+                 {"name": "train", "resources": {"limits": {"nvidia.com/gpu": "1"}}}]}}}]},
+      "status": {"admission": {"clusterQueue": "team-b-cq"},
+                 "conditions": [
+                   {"type": "Admitted", "status": "True", "lastTransitionTime": "2026-10-01T10:00:32Z"}]}
+    }
+  ]
+}

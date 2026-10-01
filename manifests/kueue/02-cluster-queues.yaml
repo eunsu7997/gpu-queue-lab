@@ -1,0 +1,55 @@
+# Cluster has 4 GPUs (2 workers x 2). Each team owns 2 (nominalQuota).
+# Both queues share the cohort "gpu-pool", so an idle team's GPUs can be
+# borrowed (up to borrowingLimit) and reclaimed by preemption when the
+# owner comes back.
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: team-a-cq
+spec:
+  cohortName: gpu-pool
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: team-a
+  queueingStrategy: BestEffortFIFO
+  preemption:
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+  resourceGroups:
+    - coveredResources: ["cpu", "memory", "nvidia.com/gpu"]
+      flavors:
+        - name: gpu-node
+          resources:
+            - name: cpu
+              nominalQuota: 2
+            - name: memory
+              nominalQuota: 2Gi
+            - name: nvidia.com/gpu
+              nominalQuota: 2
+              borrowingLimit: 2
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: team-b-cq
+spec:
+  cohortName: gpu-pool
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: team-b
+  queueingStrategy: BestEffortFIFO
+  preemption:
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+  resourceGroups:
+    - coveredResources: ["cpu", "memory", "nvidia.com/gpu"]
+      flavors:
+        - name: gpu-node
+          resources:
+            - name: cpu
+              nominalQuota: 2
+            - name: memory
+              nominalQuota: 2Gi
+            - name: nvidia.com/gpu
+              nominalQuota: 2
+              borrowingLimit: 2
