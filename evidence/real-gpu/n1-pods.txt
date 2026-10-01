@@ -1,0 +1,2 @@
+NAME               READY   STATUS      RESTARTS   AGE     IP          NODE              NOMINATED NODE   READINESS GATES
+bench-n1-1-hm9ms   0/1     Completed   0          7m49s   10.42.0.6   desktop-0do0ia6   <none>           <none>

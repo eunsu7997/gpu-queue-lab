@@ -1,0 +1,4 @@
+{"job": "bench-n4-1-lqphv", "steps": 3000, "train_s": 230.38, "steps_per_s": 13.0, "gpu": "NVIDIA GeForce RTX 4060", "max_mem_mb": 218, "start": 1790865090.19, "end": 1790865320.57}
+{"job": "bench-n4-2-qgp64", "steps": 3000, "train_s": 230.31, "steps_per_s": 13.0, "gpu": "NVIDIA GeForce RTX 4060", "max_mem_mb": 218, "start": 1790865089.82, "end": 1790865320.13}
+{"job": "bench-n4-3-knwpd", "steps": 3000, "train_s": 229.94, "steps_per_s": 13.0, "gpu": "NVIDIA GeForce RTX 4060", "max_mem_mb": 218, "start": 1790865090.75, "end": 1790865320.69}
+{"job": "bench-n4-4-rz2gx", "steps": 3000, "train_s": 227.69, "steps_per_s": 13.2, "gpu": "NVIDIA GeForce RTX 4060", "max_mem_mb": 218, "start": 1790865090.87, "end": 1790865318.56}

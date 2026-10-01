@@ -11,11 +11,12 @@ Windows + Docker Desktop kind는 기본 설정으로 노드 안에 GPU가 안 �
 - WSL2 Ubuntu에 **k3s** 설치 + NVIDIA Container Toolkit
 
 어느 쪽이든 끝나면 `kubectl describe node`에 `nvidia.com/gpu: 1`이 보여야 합니다.
-이 단계는 아직 검증 전이니, 막히면 그 과정을 그대로 트러블슈팅 기록으로 남깁니다.
+검증된 방법(2026-10-01): WSL2 Ubuntu 24.04 + k3s + NVIDIA Container Toolkit. `scripts/wsl/install-k3s-gpu.sh`(sudo) 한 번이면 k3s가 `nvidia` RuntimeClass를 자동 등록합니다.
+결과: [evidence/real-gpu/RESULTS.md](../evidence/real-gpu/RESULTS.md)
 
 ## 2. Time-slicing으로 GPU 1장을 4개로 나누기
 
-NVIDIA device plugin 설정(ConfigMap):
+NVIDIA device plugin 설정(ConfigMap). 전체 매니페스트: [manifests/real-gpu/device-plugin-timeslicing.yaml](../manifests/real-gpu/device-plugin-timeslicing.yaml)
 
 ```yaml
 version: v1
