@@ -1,0 +1,7 @@
+NAMESPACE   NAME                QUEUE       RESERVED IN   ADMITTED   FINISHED   AGE
+team-a      job-s1-a-01-11635   gpu-queue   team-a-cq     True       True       3m38s
+team-a      job-s1-a-02-a2320   gpu-queue   team-a-cq     True       True       3m38s
+team-a      job-s1-a-03-7ddb8   gpu-queue   team-a-cq     True       True       3m38s
+team-a      job-s1-a-04-a5354   gpu-queue   team-a-cq     True       True       3m38s
+team-b      job-s2-b-01-ca40e   gpu-queue   team-b-cq     True       True       3m8s
+team-b      job-s2-b-02-309e8   gpu-queue   team-b-cq     True       True       3m8s

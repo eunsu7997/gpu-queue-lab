@@ -1,0 +1,78 @@
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kueue.x-k8s.io/v1beta2","kind":"ClusterQueue","metadata":{"annotations":{},"name":"team-a-cq"},"spec":{"cohortName":"gpu-pool","namespaceSelector":{"matchLabels":{"kubernetes.io/metadata.name":"team-a"}},"preemption":{"reclaimWithinCohort":"Any","withinClusterQueue":"LowerPriority"},"queueingStrategy":"BestEffortFIFO","resourceGroups":[{"coveredResources":["cpu","memory","nvidia.com/gpu"],"flavors":[{"name":"gpu-node","resources":[{"name":"cpu","nominalQuota":2},{"name":"memory","nominalQuota":"2Gi"},{"borrowingLimit":2,"name":"nvidia.com/gpu","nominalQuota":2}]}]}]}}
+  creationTimestamp: "2026-10-01T02:33:43Z"
+  finalizers:
+  - kueue.x-k8s.io/resource-in-use
+  generation: 6
+  name: team-a-cq
+  resourceVersion: "3822"
+  uid: 85252451-00e0-4c9d-a121-0c6a5aec08c2
+spec:
+  cohortName: gpu-pool
+  flavorFungibility:
+    whenCanBorrow: MayStopSearch
+    whenCanPreempt: TryNextFlavor
+  namespaceSelector:
+    matchLabels:
+      kubernetes.io/metadata.name: team-a
+  preemption:
+    borrowWithinCohort:
+      policy: Never
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+  queueingStrategy: BestEffortFIFO
+  resourceGroups:
+  - coveredResources:
+    - cpu
+    - memory
+    - nvidia.com/gpu
+    flavors:
+    - name: gpu-node
+      resources:
+      - name: cpu
+        nominalQuota: 2
+      - name: memory
+        nominalQuota: 2Gi
+      - borrowingLimit: 2
+        name: nvidia.com/gpu
+        nominalQuota: 2
+  stopPolicy: None
+status:
+  admittedWorkloads: 4
+  conditions:
+  - lastTransitionTime: "2026-10-01T02:34:20Z"
+    message: Can admit new workloads
+    observedGeneration: 6
+    reason: Ready
+    status: "True"
+    type: Active
+  flavorsReservation:
+  - name: gpu-node
+    resources:
+    - borrowed: "0"
+      name: cpu
+      total: 400m
+    - borrowed: "0"
+      name: memory
+      total: 256Mi
+    - borrowed: "2"
+      name: nvidia.com/gpu
+      total: "4"
+  flavorsUsage:
+  - name: gpu-node
+    resources:
+    - borrowed: "0"
+      name: cpu
+      total: 400m
+    - borrowed: "0"
+      name: memory
+      total: 256Mi
+    - borrowed: "2"
+      name: nvidia.com/gpu
+      total: "4"
+  pendingWorkloads: 0
+  reservingWorkloads: 4

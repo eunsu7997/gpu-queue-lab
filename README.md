@@ -79,14 +79,27 @@ python -m unittest discover -s tests -v
 
 `tests/fixtures/workloads.json`은 Kueue Workload 형식에 맞춰 손으로 만든 예시입니다. 실제 클러스터에서 S2를 돌린 뒤 `evidence/s2/workloads.json`으로 교체하면 더 좋습니다.
 
+## 결과 (시뮬레이션 모드)
+
+| 지표 | 빌려 쓰기 있음 | 엄격한 할당량 |
+|---|---|---|
+| 작업 4개 완료 시간 | **121초** | 243초 |
+| 평균 GPU 사용률 | **98%** | 50% |
+| 주인 팀 GPU 회수 시간 (선점) | **1~2초** | - |
+| high 작업 대기시간 (선점) | **1초** | - |
+
+![utilization](evidence/sim/s1-vs-s4-utilization.png)
+
+자세한 내용과 원본 증거: [evidence/sim/RESULTS.md](evidence/sim/RESULTS.md)
+
 ## 진행 상황
 
 | 단계 | 상태 |
 |---|---|
 | Kueue 매니페스트 작성 + v0.20.0 CRD 스키마 검증 | ✅ 완료 |
 | `gpuq` 제출/리포트 도구 + 단위 테스트 | ✅ 완료 |
-| kind 클러스터 + 가짜 GPU 등록 | ⬜ NOT VERIFIED |
-| S1~S4 실험 | ⬜ NOT VERIFIED |
+| S1~S4 실험 (KWOK 시뮬레이션, 실제 Kueue 컨트롤러) | ✅ VERIFIED |
+| kind 클러스터 + 가짜 GPU 등록 (Windows) | ⬜ NOT VERIFIED |
 | 실제 GPU time-slicing | ⬜ NOT VERIFIED |
 
 > 실제로 돌려서 확인한 항목만 완료로 바꿉니다.
