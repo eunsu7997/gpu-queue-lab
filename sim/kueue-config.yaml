@@ -1,0 +1,18 @@
+# Kueue running as a local process (not in-cluster): no leader election,
+# no cert manager, only the batch/Job integration.
+apiVersion: config.kueue.x-k8s.io/v1beta2
+kind: Configuration
+namespace: kueue-system
+health:
+  healthProbeBindAddress: :18081
+metrics:
+  bindAddress: :18443
+webhook:
+  port: 19443
+leaderElection:
+  leaderElect: false
+internalCertManagement:
+  enable: false
+integrations:
+  frameworks:
+  - "batch/job"
