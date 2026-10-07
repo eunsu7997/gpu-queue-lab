@@ -77,6 +77,8 @@ sim/down.sh
 python -m unittest discover -s tests -v
 ```
 
+push와 PR마다 GitHub Actions에서 Python 3.10·3.12로 자동 실행됩니다 ([.github/workflows/tests.yml](.github/workflows/tests.yml)). 클러스터나 GPU 없이 도는 단위 테스트만 포함합니다.
+
 `tests/fixtures/workloads.json`은 Kueue Workload 형식에 맞춰 손으로 만든 예시입니다. 실제 클러스터에서 S2를 돌린 뒤 `evidence/s2/workloads.json`으로 교체하면 더 좋습니다.
 
 ## 결과 (시뮬레이션 모드)
